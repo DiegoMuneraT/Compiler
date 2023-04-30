@@ -24,12 +24,12 @@ Si no se puede implementar el analizador retornará el mensaje “error”. De l
 ## Ejemplo
 
 ### Input
-`S -> aSb | c`
-`aacbb`
-`acb`
+`S -> aSb | c`\\
+`aacbb`\\
+`acb`\\
 `ab`
 
 ### Output
-`si`
-`si`
+`si`\\
+`si`\\
 `no`
