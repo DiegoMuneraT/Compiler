@@ -2,8 +2,8 @@
 
 ## Qué se realizó?
 
-1. Analizador sintactico descendentes (Top-Down)
-2. Analizador sintactico ascendentes (Bottom-Up)
+1. Analizador sintactico descendente (Top-Down)
+2. Analizador sintactico ascendente (Bottom-Up)
 
 ## Input
 
