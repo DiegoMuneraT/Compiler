@@ -5,6 +5,10 @@
 1. Analizador sintactico descendente (Top-Down)
 2. Analizador sintactico ascendente (Bottom-Up)
 
+## Cómo es su flujo de trabajo?
+
+<img width="758" alt="Captura de pantalla 2023-04-29 a la(s) 11 01 28 p m" src="https://user-images.githubusercontent.com/73514009/235334938-1e745904-001f-4ed0-971d-2c3e3cf4e5e8.png">
+
 ## Input
 
 Una gramatica libre de contexto G. Se recibe una lista de n > 0 cadenas, cada cadena en una linea independiente. La entrada termina cuando se lee una linea en blanco.
