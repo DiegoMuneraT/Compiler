@@ -30,13 +30,8 @@ Si no se puede implementar el analizador retornará el mensaje “error”. De l
 `ab`
 
 ### Output
-<<<<<<< HEAD
 `si`   
 `si`   
-`no`
-=======
-`si`
-`si`
 `no`
 
 ### Disclaimer (Borrar antes de la entrega)
@@ -50,4 +45,3 @@ Por ahora lo que hay es un archivo de prueba y aquí están las instrucciones pa
 
 
 
->>>>>>> 99134c3 (Añadiendo ejemplo)
