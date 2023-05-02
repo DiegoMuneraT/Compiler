@@ -36,9 +36,25 @@ Si no se puede implementar el analizador retornará el mensaje “error”. De l
 
 ### Disclaimer (Borrar antes de la entrega)
 
-Por ahora lo que hay es un archivo de prueba y aquí están las instrucciones para compilarlo:   
+Por ahora lo que hay es un archivo de prueba y aquí están las instrucciones para compilarlo:
 
-1. Crear archivo de Flex (En este caso se creó Test.y)   
-2. Compilar el archivo ejecutando el código `flex Test.y` en la terminal   
+### Si se utiliza solo Flex:
+
+1. Crear archivo de Flex (ArchivoL.l)   
+2. Compilar el archivo ejecutando el código `flex ArchivoL.l` en la terminal   
 3. Luego debe aparecer un archivo llamado lex.yy.c que es el que debemos compilar con C ejecutando `gcc lex.yy.c -ll` en la terminal   
 4. Finalmente tenemos el archivo a.out que será el ejecutable de nuestro programa, lo podemos poner a funcionar ejecutando `./a.out` en la terminal
+
+### Si se utiliza Flex y Yacc:
+
+1. Crear archivo de Flex (ArchivoL.l)   
+2. Compilar el archivo ejecutando el código `flex ArchivoL.l` en la terminal
+3. Crear archivo de Yacc (ArchivoY.y)
+4. Compilar el archivo ejecutando el código `bison -d ArchivoY.y`
+5. Luego debe aparecer dos archivos llamados `lex.yy.c` y `ArchivoY.tab.c ` que son los que debemos compilar con C ejecutando `gcc ArchivoY.tab.c lex.yy.c -o ejecutable` en la terminal   
+6. Finalmente tenemos el archivo `ejecutable.out` que será el ejecutable de nuestro programa, lo podemos poner a funcionar ejecutando `./ejecutable.out` en la terminal
+
+Podria ser que tuvieramos archivos como `main.c` con el código para el programa principal entonces su compilación debería ser con el comando `gcc ArchivoY.tab.c lex.yy.c main.c -o ejecutable`. 
+
+Adicionalmente, podríamos necesitar el comando `-lfl` el cual es necesario al compilar un archivo yacc y lex para enlazar la biblioteca Flex al archivo generado por Yacc/Bison, permitiendo que el compilador completo funcione correctamente.
+
