@@ -42,6 +42,3 @@ Por ahora lo que hay es un archivo de prueba y aquí están las instrucciones pa
 2. Compilar el archivo ejecutando el código `flex Test.y` en la terminal   
 3. Luego debe aparecer un archivo llamado lex.yy.c que es el que debemos compilar con C ejecutando `gcc lex.yy.c -ll` en la terminal   
 4. Finalmente tenemos el archivo a.out que será el ejecutable de nuestro programa, lo podemos poner a funcionar ejecutando `./a.out` en la terminal
-
-
-
