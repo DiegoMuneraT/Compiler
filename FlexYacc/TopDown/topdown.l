@@ -9,7 +9,7 @@
 ':'         { return COLON; }
 ';'         { return SEMICOLON; }
 '|'         { return PIPE; }
-'->'        { return ARROW; }
+"->"        { return ARROW; }
 '('         { return LPAREN; }
 ')'         { return RPAREN; }
 '['         { return LBRACKET; }
