@@ -8,32 +8,25 @@ class Grammar:
         self.first = {}
         self.follow = {}
 
-    def _create_follow_Nterminal_End(self, token, left):
-        for i, s in enumerate(token):
-            if s in self.Nterminals or s in self.terminals:
-                if i >= len(token) - 1:
-                    continue
+    def _create_follow_Nterminal_End(self, element, left):
+        for i in range(1, len(element)):
+            if element[i-1] in self.Nterminals or element[i-1] in self.terminals:
+                if element[i] in self.Nterminals:
+                    if (i + 1) == len(element):
+                        follow = self.follow[element[i]]
+                        for key in follow.keys():
+                            self.follow[left][key] = key
 
-                if token[i + 1] in self.Nterminals:
-                    if (i + 2) == len(token):
-                        follow = self.follow[token[i + 1]]
-                        for key, value in follow.items():
-                            self.follow[left][key] = value
-
-    def _create_follow_Nterminal_epsilon(self, token, left):
-        for i, s in enumerate(token):
-            if s in self.Nterminals:
-                if i >= len(token) - 1:
-                    continue
-
-                if token[i + 1] in self.Nterminals:
-                    first = self.first[token[i + 1]]
-
-                    for key, value in first.items():
+    def _create_follow_Nterminal_epsilon(self, element):
+        for i in range(1, len(element)):
+            if element[i-1] in self.Nterminals:
+                if element[i] in self.Nterminals:
+                    first = self.first[element[i]]
+                    for key in first.keys():
                         if key == "epsilon":
-                            follow = self.follow[token[i + 1]]
-                            for key, value in follow.items():
-                                self.follow[s][key] = value
+                            follow = self.follow[element[i]]
+                            for key in follow.keys():
+                                self.follow[element[i-1]][key] = key
 
     def _create_follow_Nterminal_Nterminal(self, element):
         for i in range(1, len(element)):
@@ -61,13 +54,12 @@ class Grammar:
                     self.follow[left]["$"] = "$"
                 for element in right:
                     self._create_follow_Nterminal_terminal(element)
-                    self._create_follow_Nterminal_Nterminal(element, left)
-                    self._create_follow_Nterminal_epsilon(element, left)
+                    self._create_follow_Nterminal_Nterminal(element)
+                    self._create_follow_Nterminal_epsilon(element)
                     self._create_follow_Nterminal_End(element, left)
 
     def _create_first(self, Nterminal, left):
         productions = self.rules[Nterminal]
-        print(productions)
         for element in productions:
             if element == "epsilon":
                 self.first[left][element] = element
@@ -83,9 +75,7 @@ class Grammar:
                 self._create_first(element[0], left)
 
     def create_first(self):
-        print(self.rules.items())
         for left, right in self.rules.items():
-            print(left, right)
             if left not in self.first:
                 self.first[left] = {}
             for element in right:
