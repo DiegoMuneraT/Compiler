@@ -24,6 +24,10 @@ def read_grammar():
 
 
 grammar = read_grammar()
-table = Table(grammar)
-table.create_table()
-table.print_table()
+# table = Table(grammar)
+# table.create_table()
+print(grammar.follow)
+# print(grammar.rules)
+# print(grammar.terminals)
+# print(grammar.Nterminals)
+# table.print_table()

@@ -11,9 +11,12 @@ class Table:
         for left, right in self.grammar.rules.items():
             A = right[0]
             productions[left] = A
-
-        print(productions)
-        print(self.grammar.first,'\n','\n')
+        # print("Productions\n")
+        # print(productions)
+        # print("First\n")
+        # print(self.grammar.first,'\n','\n')
+        # print("Follow\n")
+        # print(self.grammar.follow,'\n','\n')
         
         for A in productions:
             tabla[A] = {}
