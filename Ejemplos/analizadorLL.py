@@ -109,11 +109,9 @@ Recordar que para que sea LL(1) no puede:
 """
 #La podemos procesar como un diccionario así:
 gramatica = {
-    'S': [['A', 'B'], ['C', 'D']],
-    'A': [['a', 'A'], ['epsilon']],
-    'B': [['b', 'B'], ['epsilon']],
-    'C': [['c', 'C'], ['epsilon']],
-    'D': [['d', 'D'], ['epsilon']],
+    'S': [['AaAb'], ['BbBa']],
+    'A': [['epsilon']],
+    'B': [['epsilon']],
 }
 
 first = obtener_first_gramatica(gramatica)
