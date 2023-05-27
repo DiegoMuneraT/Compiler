@@ -1,12 +1,14 @@
 import re
 
-class Grammar:
+
+class Parser:
     def __init__(self):
         self.rules = {}
         self.terminals = {}
         self.Nterminals = {}
         self.first = {}
         self.follow = {}
+        self.start = None
 
     def _create_follow_Nterminal_End(self, element, left):
         for i in range(1, len(element)):
@@ -39,7 +41,7 @@ class Grammar:
                         self.follow[element[i-1]][key] = key
 
     def _create_follow_Nterminal_terminal(self, element):
-        for i in range(1,len(element)):
+        for i in range(1, len(element)):
             if element[i-1] in self.Nterminals:
                 if element[i] in self.terminals:
                     self.follow[element[i-1]][element[i]] = element[i]
@@ -89,7 +91,7 @@ class Grammar:
     def add_rule(self, left, right):
         if left not in self.rules:
             self.rules[left] = []
-        self.rules[left]+=right
+        self.rules[left] += right
 
     def add_terminals(self, right):
         for element in right:
@@ -101,7 +103,6 @@ class Grammar:
 
     def add_Nterminals(self, left):
         self.Nterminals[left] = left
-
 
 """
 1. Calcular los conjuntos FIRST y FOLLOW para cada simbolo no terminal en la gramatica.
