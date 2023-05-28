@@ -50,7 +50,11 @@ G -> t
 A -> G
 
 Ambigua
-E -> T + E | T
-T -> a * T | a | (E)
+E -> T | T + E
+T -> (E) | a * T | a
 
 S -> aSb | c
+
+C -> AB
+A -> a
+B -> a

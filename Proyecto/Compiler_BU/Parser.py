@@ -27,9 +27,13 @@ class Parser:
         self.Nterminals[left] = left
 
     def add_productions(self, production):
-        self.productions.append(production)
+        left, right = production.split("->")
+        right = right.split("|")
+        for element in right:
+            self.productions.append(f"{left}->{element}")
 
     def item_closure(self, I, productions):
+        #Se puede optimizar verificando si I está vacio.
         J = I.copy()
         while True:
             added = False
@@ -40,36 +44,38 @@ class Parser:
                     next_Nterminal = right[dot_index + 1]
                     for production in productions:
                         if production.startswith(next_Nterminal):
-                            new_item = production.replace('->', '->.')
+                            new_item = production.replace("->", "->.")
                             if new_item not in J:
-                                J.add(new_item)
+                                J.append(new_item)
                                 added = True
             if not added:
                 break
+        # print
+        # (J)
         return J
 
     def goto(self, I, X, productions):
-        new_items = set()
+        new_items = []
         for item in I:
             left, right = item.split("->")
             dot_index = right.index(".")
             if dot_index + 1 < len(right) and right[dot_index + 1] == X:
                 new_item = left + "->" + right[:dot_index] + X + "." + right[dot_index + 2:]
-                new_items.add(new_item)
+                new_items.append(new_item)
         return self.item_closure(new_items, productions)
 
     def get_item_set(self, productions):
         item_sets = []
         start_production = productions[0]
         start_symbol = start_production.split("->")[0]
-        start_item_set = self.item_closure({f"{start_symbol}' ->.{start_symbol}"}, productions)
+        start_item_set = self.item_closure([f"{start_symbol}'->.{start_symbol}"], productions)
         item_sets.append(start_item_set)
-        symbols = set()
+        symbols = [start_symbol]
         for production in productions:
             left, right = production.split("->")
             for symbol in right:
-                symbols.add(symbol)
-        symbols.add(start_symbol)
+                if symbol in symbols: continue
+                symbols.append(symbol)
 
         while True:
             added = False
@@ -85,16 +91,16 @@ class Parser:
 
     def get_lr0_canonical(self, productions):
         start_production = productions[0]
-        start_symbol = start_production.split('->')[0]
-        start_state = self.item_closure({f"{start_symbol}'->.{start_symbol}"}, productions)
+        start_symbol = start_production.split("->")[0]
+        start_state = self.item_closure([f"{start_symbol}'->.{start_symbol}"], productions)
         states = [start_state]
         transitions = []
-        symbols = set()
+        symbols = [start_symbol]
         for production in productions:
-            left, right = production.split('->')
+            left, right = production.split("->")
             for symbol in right:
-                symbols.add(symbol)
-        symbols.add(start_symbol)
+                symbols.append(symbol)
+        
         while True:
             added = False
             for state in states:

@@ -11,15 +11,8 @@ class Table:
         start_production = productions[0]
         start_symbol = start_production.split('->')[0]
         states, transitions = self.grammar.get_lr0_canonical(productions)
-        terminals = set()
-        non_terminals = set()
-        for production in productions:
-            left, right = production.split('->')
-            non_terminals.add(left)
-            for symbol in right:
-                if symbol not in non_terminals:
-                    terminals.add(symbol)
-        terminals.add('$')
+        terminals = list(self.grammar.terminals) + ['$']
+        non_terminals = list(self.grammar.Nterminals)
         action = {}
         goto = {}
         for i, state in enumerate(states):
@@ -54,10 +47,12 @@ class Table:
         parsing_table = self.get_parsing_table(self.grammar.productions)
         action_table = parsing_table['action']
         goto_table = parsing_table['goto']
+        print("Tabla de acciones" + str(action_table) +"\n")
+        print("Tabla de goto" + str(goto_table))
         for state in sorted(action_table.keys()):
             print(f' State {state}:')
             for symbol in sorted(action_table[state].keys()):
                 print(f'  action[{state}][{symbol}] = {action_table[state][symbol]}')
-        for state in sorted(goto_table.keys()):
-            for symbol in sorted(goto_table[state].keys()):
+            for symbol in goto_table[state].keys():
                 print(f'  goto[{state}][{symbol}] = {goto_table[state][symbol]}')
+            

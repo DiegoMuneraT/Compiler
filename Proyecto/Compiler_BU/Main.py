@@ -10,7 +10,7 @@ def read_grammar():
     line = str1.join(line)
     while line:
         grammar.add_productions(line)
-        left, right = line.split('->')
+        left, right = line.split("->")
         right = right.split("|")
         if grammar.start is None:
             grammar.start = left
@@ -29,9 +29,9 @@ def read_grammar():
     # Printear los item sets
     item_sets = grammar.get_item_set(grammar.productions)
     for i, item_set in enumerate(item_sets):
-        print(f'Item set {i}:')
+        print(f"Item set {i}:")
         for item in item_set:
-            print(f' {item}')
+            print(f" {item}")
 
     # -----------------ESTADOS Y TRANSICIONES-----------------
     # Printear los estados y las transiciones
