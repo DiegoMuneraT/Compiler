@@ -29,7 +29,7 @@ class Lexer:
                 state = stack[-1]
                 stack.append(head)
                 stack.append(goto_table[state][head])
-            elif value == 'accept':
+            elif action == 'accept':
                 return True
             else:
                 return False
@@ -40,8 +40,8 @@ class Lexer:
         string = input("Ingrese la cadena: ")
         result = self.parse_string(string, parsing_table)
         # Esto es lo que no funciona, printea siempre 'no' al quitar el not del if
-        if not result:
-            print('si', result)
+        if result:
+            print('si se acepta')
         else:
-            print('no', result)
+            print('no se acepta')
     

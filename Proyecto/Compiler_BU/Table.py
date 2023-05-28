@@ -47,8 +47,6 @@ class Table:
         parsing_table = self.get_parsing_table(self.grammar.productions)
         action_table = parsing_table['action']
         goto_table = parsing_table['goto']
-        print("Tabla de acciones" + str(action_table) +"\n")
-        print("Tabla de goto" + str(goto_table))
         for state in sorted(action_table.keys()):
             print(f' State {state}:')
             for symbol in sorted(action_table[state].keys()):

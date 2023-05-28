@@ -50,8 +50,8 @@ G -> t
 A -> G
 
 Ambigua
-E -> T | T + E
-T -> (E) | a * T | a
+E -> T + E | T
+T -> a * T | a | (E)
 
 S -> aSb | c
 
